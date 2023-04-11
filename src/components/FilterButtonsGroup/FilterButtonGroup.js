@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyledGroupButtons} from '../../styles/GroupButtons.styled'
+import {StyledGroupButtons} from '../../styles/GroupButtons.styled';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';

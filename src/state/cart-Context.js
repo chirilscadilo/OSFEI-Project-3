@@ -20,6 +20,8 @@ const CartContext = React.createContext({
     allFilter:()=>{},
     doneFilter: ()=>{},
     todoFilter:()=>{},
+    removeAll:()=>{},
+    removeAllDone:()=>{},
 });
 
 export const CartProvider = (props)=>{
@@ -85,6 +87,15 @@ export const CartProvider = (props)=>{
     setTodoList(prevState=>!prevState);
     }
 
+    const removeAll=()=>{
+        setItemsList([]);
+    };
+
+    const removeAllDone=()=>{
+        const filtrDoneItems = items.filter(item => item.done !== true);
+        setItemsList(filtrDoneItems);
+    }
+
   return <CartContext.Provider 
     value={{
         items: items,
@@ -102,6 +113,8 @@ export const CartProvider = (props)=>{
         allFilter:allFilter,
         doneFilter: doneFilter,
         todoFilter:todoFilter,
+        removeAll:removeAll,
+        removeAllDone:removeAllDone,
     }}>
         {props.children}
     </CartContext.Provider>

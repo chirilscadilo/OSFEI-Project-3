@@ -33,7 +33,11 @@ function App() {
         {context.openEdit && (<EditForm/>)}
         <InputForm />
         <FilterButtonGroup/>
-        <TaskList todoItems={context.isDoneList?filtrDoneItems :context.isTodoList?filterTodoItems :context.items}/>
+        <TaskList todoItems={
+          context.isDoneList?filtrDoneItems 
+          :context.isTodoList?filterTodoItems 
+          :context.items
+          }/>
       </Container>
     </ThemeProvider>
   );

@@ -1,5 +1,4 @@
 import React, {useContext} from "react";
-import classes from './TaskList.module.css'
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -9,16 +8,30 @@ import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import Typography from '@mui/material/Typography';
 import CartContext from "../../state/cart-Context";
+import {makeStyles} from '@mui/styles';
+import { Button } from "@mui/material";
+import {StyledFlexButtons} from '../../styles/DeleteButtons.styled';
 
+const useStyles = makeStyles({
+    h4:{
+        textAlign:'center',
+    },
+    li:{
+        textDecoration: 'line-through',
+    }
+})
 
 function TaskList(props){
+    const classes = useStyles();
     const context = useContext(CartContext);
     if(props.todoItems.length === 0){
-        return <h2 className={classes['no-items']}>No items found</h2>
+        return <Typography className={classes.h4} variant="h4">No items found</Typography>
     };
     
     return(
+        <>
         <List dense sx={{ width: '100%', maxWidth: 510, bgcolor: 'background.paper' , margin: '0 auto', borderRadius: 2}}>
             {props.todoItems.map((item, index) => (
                 <ListItem key={item.id}>
@@ -28,7 +41,7 @@ function TaskList(props){
                         onClick={() => context.handleCheckClick(index)}
                     />
                 </ListItemIcon>
-                <ListItemText primary={item.text} />
+                <ListItemText primary={item.text} className={item.done ? classes.li : ''}/>
                 <ListItemSecondaryAction>
                     <IconButton onClick={() => {context.handleEditItem({id:item.id, text:item.text})}}>
                         <EditIcon />
@@ -41,6 +54,13 @@ function TaskList(props){
                 </ListItem>
             ))}
         </List>
+        <StyledFlexButtons>
+            <Button onClick={()=>context.removeAll()}>Delete All</Button>
+            <Button onClick={()=>context.removeAllDone()}>Delete Done</Button>
+        </StyledFlexButtons>
+            
+
+        </>
     )
 }
 

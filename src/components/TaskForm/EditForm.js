@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
 import CartContext from "../../state/cart-Context";
+import {StyledFlexButtons} from '../../styles/DeleteButtons.styled';
 
 const EditForm = (props)=>{
     const context = useContext(CartContext);
@@ -29,12 +30,14 @@ const EditForm = (props)=>{
                     fullWidth
                     required
                 />
-                <Button type="submit" variant="contained" color="primary">
-                    Update Item
-                </Button>
-                <Button onClick={context.handleCloseEdit} variant="contained" color="secondary">
-                    Cancel
-                </Button>
+                <StyledFlexButtons>
+                    <Button type="submit" variant="contained" color="primary">
+                        Update Item
+                    </Button>
+                    <Button onClick={context.handleCloseEdit} variant="contained" color="secondary">
+                        Cancel
+                    </Button>
+                </StyledFlexButtons>
                 </form>
         </div>
         </StyledInputForm>

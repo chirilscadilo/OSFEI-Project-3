@@ -20,6 +20,7 @@ const useStyles = makeStyles({
     },
     li:{
         textDecoration: 'line-through',
+        color: 'red',
     }
 })
 
@@ -55,8 +56,8 @@ function TaskList(props){
             ))}
         </List>
         <StyledFlexButtons>
-            <Button onClick={()=>context.removeAll()}>Delete All</Button>
-            <Button onClick={()=>context.removeAllDone()}>Delete Done</Button>
+            <Button variant="contained" onClick={()=>context.removeAll()}>Delete All</Button>
+            <Button variant="contained" onClick={()=>context.removeAllDone()}>Delete Done</Button>
         </StyledFlexButtons>
             
 

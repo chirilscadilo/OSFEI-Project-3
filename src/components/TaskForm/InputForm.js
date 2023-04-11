@@ -31,7 +31,7 @@ const InputForm = (props)=>{
                     required
                     />
                     
-                    <Button type="submit" variant="contained" color="secondary">Add</Button>
+                    <Button type="submit" variant="contained">Add</Button>
                 </form>
             </div>
         </StyledInputForm>

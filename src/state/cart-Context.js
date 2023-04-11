@@ -78,13 +78,13 @@ export const CartProvider = (props)=>{
     }
 
     const doneFilter = ()=>{
-    setIsDoneList(prevState=>!prevState);
+    setIsDoneList(true);
     setTodoList(false);
     }
 
     const todoFilter =()=>{
     setIsDoneList(false);
-    setTodoList(prevState=>!prevState);
+    setTodoList(true);
     }
 
     const removeAll=()=>{

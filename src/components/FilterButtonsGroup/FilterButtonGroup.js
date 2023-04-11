@@ -22,15 +22,23 @@ function FilterButtonGroup(props) {
 
     /*click event for each button*/
     const handleClick = () => {
-    return(options[selectedIndex]==='Todo'?context.todoFilter()
-        :options[selectedIndex]==='Done'?context.doneFilter()
-        :context.allFilter());
+        return(options[selectedIndex]==='Todo'?context.todoFilter()
+            :options[selectedIndex]==='Done'?context.doneFilter()
+            :context.allFilter());
     };
 
+    /*click event for each button*/
     const handleMenuItemClick = (event, index) => {
-    setSelectedIndex(index);
-    setOpen(false);
+        setSelectedIndex(index);
+        setOpen(false);
     }
+    
+    React.useEffect(()=>{
+        const select = options[selectedIndex]==='Todo'?context.todoFilter()
+            :options[selectedIndex]==='Done'?context.doneFilter()
+            :context.allFilter();
+        return select;
+    },[context, selectedIndex])
 
     const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -79,7 +87,7 @@ function FilterButtonGroup(props) {
                     {options.map((option, index) => (
                     <MenuItem
                         key={option}
-                        selected={index === selectedIndex}
+                        selected={selectedIndex === index}
                         onClick={(event) => handleMenuItemClick(event, index)}
                     >
                         {option}

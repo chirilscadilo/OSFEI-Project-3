@@ -13,6 +13,7 @@ const theme = {
     body: `#c0cdcf`,
     input:`#fff`,
     buttons: `#09a4b3`,
+    deleteButons: `#d63a0f`,
   }
 };
 

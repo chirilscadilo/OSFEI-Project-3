@@ -11,7 +11,7 @@ export const StyledFlexButtons = styled.div`
 
     button{
         color: #fff;
-        background-color: ${({theme})=>theme.colors.buttons};
+        background-color: ${({theme})=>theme.colors.deleteButons};
     }
     
 `

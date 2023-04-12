@@ -5,7 +5,7 @@ import React, {useContext} from 'react';
 import InputForm from './components/TaskForm/InputForm';
 import TaskList from './components/TaskList/TaskList';
 import EditForm from './components/TaskForm/EditForm';
-import FilterButtonGroup from './components/FilterButtonsGroup/FilterButtonGroup';
+
 import CartContext from './state/cart-Context';
 
 const theme = {
@@ -20,6 +20,7 @@ const theme = {
 function App() {
   const context = useContext(CartContext);
   
+  /*preset filters*/
   const filtrDoneItems=context.items.filter(item =>{
     return item.done === true;
   })
@@ -33,7 +34,6 @@ function App() {
       <Container>
         {context.openEdit && (<EditForm/>)}
         <InputForm />
-        <FilterButtonGroup/>
         <TaskList todoItems={
           context.filter==='done'?filtrDoneItems 
           :context.filter==='todo'?filterTodoItems 

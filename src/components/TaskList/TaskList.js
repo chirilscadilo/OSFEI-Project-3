@@ -1,4 +1,5 @@
 import React, {useContext} from "react";
+import FilterButtonGroup from '../FilterButtonsGroup/FilterButtonGroup';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -21,6 +22,7 @@ const useStyles = makeStyles({
     li:{
         textDecoration: 'line-through',
         color: 'red',
+        fontSize: 18,
     }
 })
 
@@ -33,6 +35,8 @@ function TaskList(props){
     
     return(
         <>
+        <FilterButtonGroup/>
+
         <List dense sx={{ width: '100%', maxWidth: 510, bgcolor: 'background.paper' , margin: '0 auto', borderRadius: 2}}>
             {props.todoItems.map((item, index) => (
                 <ListItem key={item.id}>
@@ -42,7 +46,7 @@ function TaskList(props){
                         onClick={() => context.handleCheckClick(index)}
                     />
                 </ListItemIcon>
-                <ListItemText primary={item.text} className={item.done ? classes.li : ''}/>
+                <ListItemText sx={{fontSize:18}} primary={item.text} className={item.done ? classes.li : ''}/>
                 <ListItemSecondaryAction>
                     <IconButton onClick={() => {context.handleEditItem({id:item.id, text:item.text})}}>
                         <EditIcon />

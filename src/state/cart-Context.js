@@ -7,9 +7,8 @@ import useLocalStorage from '../customHook/useLocalStorage';
 const CartContext = React.createContext({
     items: [],
     openEdit: false,
+    filter: 'all',
     editedTodo: null,
-    isDoneList:false,
-    isTodoList:false,
     addingNewTodo:(todo)=>{},
     handleCheckClick:(index)=>{},
     handleRemoveClick:(id)=>{},
@@ -17,9 +16,7 @@ const CartContext = React.createContext({
     handleEditItem: (todo) =>{},
     handleOpenEdit: () => {},
     handleCloseEdit: () => {},
-    allFilter:()=>{},
-    doneFilter: ()=>{},
-    todoFilter:()=>{},
+    handleFiltres: () =>{},
     removeAll:()=>{},
     removeAllDone:()=>{},
 });
@@ -27,66 +24,55 @@ const CartContext = React.createContext({
 export const CartProvider = (props)=>{
     const [items, setItemsList] = useLocalStorage('react-todo.tasks',[]);
     const [openEdit, setOpenEdit] = useState(false);
+    const [filter, setFilter] = useState('all');
     const [editedTodo, setEditedTask] = useState(null);
-    const [isDoneList, setIsDoneList] = useState(false);
-    const [isTodoList, setTodoList] = useState(false);
 
     /*adding new todo received from InputForm*/
     const addingNewTodo = (todo) =>{
-    setItemsList((prevTodos) => prevTodos.concat(todo));
+        setItemsList((prevTodos) => prevTodos.concat(todo));
     }
 
     /*mark as done, received from TaskList*/
     const handleCheckClick = (index) => {
-    const newListItems = [...items];
-    newListItems[index].done = !newListItems[index].done;
-    setItemsList(newListItems);
+        const newListItems = [...items];
+        newListItems[index].done = !newListItems[index].done;
+        setItemsList(newListItems);
     };
 
     /*remove the list Item, received from TaskList*/
     const handleRemoveClick = (id) => {
-    setItemsList(items.filter((item) => item.id !== id));
+        setItemsList(items.filter((item) => item.id !== id));
     };
 
     /*edit item function*/
     const updateTodo = (todo) => {
-    setItemsList(prevState => prevState.map(item => (
-        item.id === todo.id ? {...item, text: todo.text}: item
-    )))
-    handleCloseEdit();
+        setItemsList(prevState => prevState.map(item => (
+            item.id === todo.id ? {...item, text: todo.text}: item
+        )))
+        handleCloseEdit();
     };
 
     /*passing todo from TaskList to edit*/
     const handleEditItem = (todo) =>{
-    setEditedTask(todo);
-    handleOpenEdit();
+        setEditedTask(todo);
+        handleOpenEdit();
     }
 
-    /*open edit modal*/
+    /*open/close edit modal*/
     const handleOpenEdit = () => {
-    setOpenEdit(true);
+        setOpenEdit(true);
     };
-    /*close edit modal*/
+
     const handleCloseEdit = () => {
-    setOpenEdit(false);
+        setOpenEdit(false);
     };
 
     /*filter handles*/
-    const allFilter =()=>{
-    setIsDoneList(false);
-    setTodoList(false);
-    }
+    const handleFiltres = (event)=>{
+        setFilter(event);
+    };
 
-    const doneFilter = ()=>{
-    setIsDoneList(true);
-    setTodoList(false);
-    }
-
-    const todoFilter =()=>{
-    setIsDoneList(false);
-    setTodoList(true);
-    }
-
+    /*below buttons*/
     const removeAll=()=>{
         setItemsList([]);
     };
@@ -94,15 +80,14 @@ export const CartProvider = (props)=>{
     const removeAllDone=()=>{
         const filtrDoneItems = items.filter(item => item.done !== true);
         setItemsList(filtrDoneItems);
-    }
+    };
 
   return <CartContext.Provider 
     value={{
         items: items,
         openEdit: openEdit,
+        filter:filter,
         editedTodo: editedTodo,
-        isDoneList:isDoneList,
-        isTodoList:isTodoList,
         addingNewTodo:addingNewTodo,
         handleCheckClick:handleCheckClick,
         handleRemoveClick:handleRemoveClick,
@@ -110,9 +95,7 @@ export const CartProvider = (props)=>{
         handleEditItem: handleEditItem,
         handleOpenEdit: handleOpenEdit,
         handleCloseEdit: handleCloseEdit,
-        allFilter:allFilter,
-        doneFilter: doneFilter,
-        todoFilter:todoFilter,
+        handleFiltres: handleFiltres,
         removeAll:removeAll,
         removeAllDone:removeAllDone,
     }}>

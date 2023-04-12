@@ -6,7 +6,7 @@ export const StyledInputForm = styled.div`
     max-width: 510px;
     min-height: 50px;
     padding:10px;
-    margin: 10px auto 10px auto;
+    margin: 10px auto 20px auto;
     border-radius: 10px;
     background-color: ${({theme})=>theme.colors.input};
 

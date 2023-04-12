@@ -35,8 +35,8 @@ function App() {
         <InputForm />
         <FilterButtonGroup/>
         <TaskList todoItems={
-          context.isDoneList?filtrDoneItems 
-          :context.isTodoList?filterTodoItems 
+          context.filter==='done'?filtrDoneItems 
+          :context.filter==='todo'?filterTodoItems 
           :context.items
           }/>
       </Container>

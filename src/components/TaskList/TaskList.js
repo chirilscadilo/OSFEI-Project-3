@@ -1,5 +1,4 @@
 import React, {useContext} from "react";
-import FilterButtonGroup from '../FilterButtonsGroup/FilterButtonGroup';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -35,7 +34,7 @@ function TaskList(props){
     
     return(
         <>
-        <FilterButtonGroup/>
+        
 
         <List dense sx={{ width: '100%', maxWidth: 510, bgcolor: 'background.paper' , margin: '0 auto', borderRadius: 2}}>
             {props.todoItems.map((item, index) => (

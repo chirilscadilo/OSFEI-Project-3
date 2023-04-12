@@ -30,7 +30,7 @@ const EditForm = (props)=>{
                     fullWidth
                     required
                 />
-                <StyledFlexButtons>
+                <StyledFlexButtons changeColor>
                     <Button type="submit" variant="contained" color="primary">
                         Update Item
                     </Button>

@@ -10,32 +10,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Typography from '@mui/material/Typography';
 import CartContext from "../../state/cart-Context";
-import {makeStyles} from '@mui/styles';
+// import {makeStyles} from '@mui/styles';
 import { Button } from "@mui/material";
-import {StyledFlexButtons} from '../../styles/DeleteButtons.styled';
-
-const useStyles = makeStyles({
-    h4:{
-        textAlign:'center',
-    },
-    li:{
-        textDecoration: 'line-through',
-        color: 'red',
-        fontSize: 18,
-    }
-})
+import {StyledFlexButtons} from '../../styles/StyledFlexButtons.styled';
 
 function TaskList(props){
-    const classes = useStyles();
+    // const classes = useStyles();
     const context = useContext(CartContext);
     if(props.todoItems.length === 0){
-        return <Typography className={classes.h4} variant="h4">No items found</Typography>
+        return <Typography variant="h4" sx={{textAlign:'center'}}>No items found</Typography>
     };
-    
     return(
         <>
-        
-
         <List dense sx={{ width: '100%', maxWidth: 510, bgcolor: 'background.paper' , margin: '0 auto', borderRadius: 2}}>
             {props.todoItems.map((item, index) => (
                 <ListItem key={item.id}>
@@ -45,7 +31,7 @@ function TaskList(props){
                         onClick={() => context.handleCheckClick(index)}
                     />
                 </ListItemIcon>
-                <ListItemText sx={{fontSize:18}} primary={item.text} className={item.done ? classes.li : ''}/>
+                <ListItemText sx={item.done ?{fontSize:18, textDecoration: 'line-through',color: 'red'}:{fontSize:18}} primary={item.text} />
                 <ListItemSecondaryAction>
                     <IconButton onClick={() => {context.handleEditItem({id:item.id, text:item.text})}}>
                         <EditIcon />

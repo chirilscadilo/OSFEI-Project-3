@@ -1,29 +1,31 @@
-import React, {useRef, useContext} from "react";
+import React, {useContext} from "react";
 import {StyledInputForm} from '../../styles/InputForm.styled'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField';
 import CartContext from "../../state/cart-Context";
+import { useState } from "react";
 
 const InputForm = (props)=>{
     const context = useContext(CartContext);
-    const toDoInput = useRef();
-
+    const [toDoInput, setToDoInput] = useState('');
+    
     const sumbitHandler = (event)=>{
         event.preventDefault();
-        const enteredValue = toDoInput.current.value;
+        //const enteredValue = toDoInput.current.value;
 
-        if(enteredValue.trim().length > 0){
-            context.addingNewTodo({id: Math.random().toString() ,text:enteredValue, done:false});
+        if(toDoInput.trim().length > 0){
+            context.addingNewTodo({id: Math.random().toString() ,text:toDoInput, done:false});
         }
-        toDoInput.current.value = '';
+        setToDoInput('');
     };
 
     return(
         <StyledInputForm> 
             <div>
                 <form onSubmit={sumbitHandler} noValidate autoComplete="off">
-                    <TextField 
-                    inputRef={toDoInput}
+                    <TextField
+                    value={toDoInput}
+                    onChange={(e)=>setToDoInput(e.target.value)}
                     label="Create Todo"
                     variant="outlined" 
                     color="secondary"
@@ -31,7 +33,7 @@ const InputForm = (props)=>{
                     required
                     />
                     
-                    <Button type="submit" variant="contained">Add</Button>
+                    <Button disabled={!toDoInput} type="submit" variant="contained">Add</Button>
                 </form>
             </div>
         </StyledInputForm>

@@ -10,12 +10,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Typography from '@mui/material/Typography';
 import CartContext from "../../state/cart-Context";
-// import {makeStyles} from '@mui/styles';
 import { Button } from "@mui/material";
 import {StyledFlexButtons} from '../../styles/StyledFlexButtons.styled';
 
 function TaskList(props){
-    // const classes = useStyles();
     const context = useContext(CartContext);
     if(props.todoItems.length === 0){
         return <Typography variant="h4" sx={{textAlign:'center'}}>No items found</Typography>
